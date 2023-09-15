@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <h1>Task Tracker</h1>
+        <div>
+            <input type="text" v-model="newTask.text" placeholder="Add a new task">
+            <button @click="addTask">Add</button>
+            <select v-model="newTask.status">
+                <option value="To Do">To Do</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </div>
+        <div class="task-list">
+            <h2>To Do</h2>
+            <ul>
+                <li v-for="(task, index) in tasksToDo" :key="index" class="task-item">
+                    <input type="checkbox" v-model="task.completed">
+                    {{ task.text }}
+                    <button @click="deleteTask(index)" class="delete-button">Delete</button>
+                </li>
+                <li v-if="tasksToDo.length === 0" class="no-tasks">No tasks in To Do.</li>
+            </ul>
+        </div>
+        <div class="task-list">
+            <h2>In Progress</h2>
+            <ul>
+                <li v-for="(task, index) in tasksInProgress" :key="index" class="task-item">
+                    <input type="checkbox" v-model="task.completed">
+                    {{ task.text }}
+                    <button @click="deleteTask(index)" class="delete-button">Delete</button>
+                </li>
+                <li v-if="tasksInProgress.length === 0" class="no-tasks">No tasks in Progress.</li>
+            </ul>
+        </div>
+        <div class="task-list">
+            <h2>Completed</h2>
+            <ul>
+                <li v-for="(task, index) in tasksCompleted" :key="index" class="task-item">
+                    <input type="checkbox" v-model="task.completed">
+                    {{ task.text }}
+                    <button @click="deleteTask(index)" class="delete-button">Delete</button>
+                </li>
+                <li v-if="tasksCompleted.length === 0" class="no-tasks">No completed tasks.</li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.global.prod.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
